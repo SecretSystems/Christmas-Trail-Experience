@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Light the Season — a cinematic Christmas drive-through trail experience.">
+  <title>Light the Season — Christmas Trail Experience</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Film grain texture overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- ── Sticky Progress Navigation ───────────────────────── -->
+  <nav class="progress-nav" id="progress-nav" aria-label="Story progress">
+    <div class="progress-nav__inner">
+      <div class="progress-track" id="progress-track" role="list">
+        <!-- Populated by script.js from ACTS in scenes.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ──────────────────────────────────────── -->
+  <main id="main-content">
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero" aria-label="Introduction">
+      <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow">A Cinematic Experience</p>
+
+        <h1 class="hero__title">
+          <span class="hero__title-light">Light</span>
+          <span class="hero__title-the">the</span>
+          <span class="hero__title-season">Season</span>
+        </h1>
+
+        <p class="hero__subtitle">Christmas Trail Experience</p>
+
+        <div class="hero__meta">
+          <span class="hero__year">2024</span>
+          <span class="hero__divider" aria-hidden="true">·</span>
+          <span class="hero__location">Drive-Through</span>
+          <span class="hero__divider" aria-hidden="true">·</span>
+          <span class="hero__duration">5 Acts</span>
+        </div>
+
+        <button class="hero__cta" onclick="scrollToScenes()" aria-label="Begin the journey, scroll to first scene">
+          <span>Begin the Journey</span>
+          <svg class="hero__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Scenes — dynamically populated from SCENES in scenes.js -->
+    <div id="scenes-container"></div>
+
+    <!-- Closing / Coming Soon -->
+    <section class="closing" id="closing" aria-label="End of current content">
+      <div class="closing__content">
+        <p class="closing__eyebrow">The Journey Continues</p>
+        <h2 class="closing__title">More Acts to Come</h2>
+        <p class="closing__description">
+          Additional scenes are being woven into the experience.
+          Return to discover new wonders along the trail.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="scenes.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
