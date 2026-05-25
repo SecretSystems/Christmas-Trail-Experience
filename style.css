@@ -50,7 +50,7 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   line-height: 1.6;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.08);
 }
 
 /* ── Film Grain ──────────────────────────────────────────── */
@@ -221,7 +221,7 @@ body {
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.09);
   margin-bottom: 28px;
   animation: fadeUp 1.2s var(--ease-out) 0.15s both;
 }
@@ -280,7 +280,7 @@ body {
   font-weight: 300;
   letter-spacing: 0.22em;
   color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.09);
   text-transform: uppercase;
   margin-bottom: 52px;
   animation: fadeUp 1.2s var(--ease-out) 0.64s both;
@@ -416,7 +416,7 @@ body {
   font-size: 9px;
   letter-spacing: 0.45em;
   color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.09);
   text-transform: uppercase;
   display: block;
   margin-bottom: 14px;
@@ -542,7 +542,7 @@ body {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.09);
   margin-bottom: 22px;
 }
 
