@@ -565,6 +565,59 @@ function updateProgressNav(activeAct) {
 }
 
 // ============================================================
+// Loader — Christmas loading screen
+// ============================================================
+
+function initLoader() {
+  // Generate string-light bulbs, count scaled to viewport width
+  const colors   = ['red', 'green', 'blue', 'gold', 'orange'];
+  const bulbWrap = document.getElementById('loader-bulbs');
+  if (bulbWrap) {
+    const count = Math.max(10, Math.min(30, Math.floor(window.innerWidth / 38)));
+    for (let i = 0; i < count; i++) {
+      const b = document.createElement('span');
+      b.className = `loader__bulb loader__bulb--${colors[i % colors.length]}`;
+      // CSS custom properties let the ::after pseudo-element inherit these
+      b.style.setProperty('--bulb-delay',    `${(Math.random() * 3.5).toFixed(2)}s`);
+      b.style.setProperty('--bulb-duration', `${(1.8 + Math.random() * 2).toFixed(2)}s`);
+      bulbWrap.appendChild(b);
+    }
+  }
+
+  // Falling snow on the loader canvas — reuses the existing SnowParticles class
+  const canvas = document.getElementById('loader-canvas');
+  if (canvas) {
+    const snow = new SnowParticles(canvas);
+    snow.init();
+    snow.start();
+    window._loaderSnow = snow;
+  }
+}
+
+function setLoaderProgress(fraction) {
+  const bar = document.getElementById('loader-bar');
+  if (!bar) return;
+  const pct = Math.min(100, Math.max(0, Math.round(fraction * 100)));
+  bar.style.width = `${pct}%`;
+  bar.setAttribute('aria-valuenow', pct);
+}
+
+function dismissLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader || loader.classList.contains('is-hidden')) return;
+  setLoaderProgress(1);
+  // Short pause so the bar visually completes at 100% before fading out
+  setTimeout(() => {
+    loader.classList.add('is-hidden');
+    // Clean up snow animation and remove element after fade completes
+    setTimeout(() => {
+      if (window._loaderSnow) { window._loaderSnow.destroy(); window._loaderSnow = null; }
+      loader.remove();
+    }, 950);
+  }, 300);
+}
+
+// ============================================================
 // Hero overlay — ambient stars
 // ============================================================
 
@@ -613,13 +666,29 @@ function probeImage(src) {
 }
 
 async function init() {
+  initLoader();
   buildProgressNav();
 
   const container = document.getElementById('scenes-container');
-  if (!container) return;
+  if (!container) { dismissLoader(); return; }
 
-  // Pre-check every scene image; only render scenes whose image file loads.
-  const checks  = await Promise.all(SCENES.map(s => probeImage(s.image)));
+  // Track per-image progress so the bar advances as each image resolves
+  const imagedScenes = SCENES.filter(s => s.image);
+  const total        = imagedScenes.length || 1;
+  let   loaded       = 0;
+
+  // Safety valve: dismiss the loader after 10 s regardless of image state
+  const safetyTimer = setTimeout(dismissLoader, 10000);
+
+  const checks = await Promise.all(
+    SCENES.map(s =>
+      probeImage(s.image).then(ok => {
+        if (s.image) { loaded++; setLoaderProgress(loaded / total); }
+        return ok;
+      })
+    )
+  );
+
   const validIds = new Set(SCENES.filter((_, i) => checks[i]).map(s => s.id));
 
   let rendered = 0;
@@ -633,11 +702,13 @@ async function init() {
     attachOverlays(el, scene);
   });
 
+  clearTimeout(safetyTimer);
   initHeroOverlay();
   initSceneObserver();
   initProgressObserver();
   initImageEffects();
   updateProgressNav(0);
+  dismissLoader();
 }
 
 document.addEventListener('DOMContentLoaded', init);

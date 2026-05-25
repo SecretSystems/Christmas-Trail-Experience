@@ -14,6 +14,34 @@
 </head>
 <body>
 
+  <!-- ── Loading Screen ───────────────────────────────────────
+       Rendered immediately from HTML/CSS; JS dismisses it once
+       all scene images have loaded.
+  ──────────────────────────────────────────────────────────── -->
+  <div id="loader" role="status" aria-label="Loading experience">
+    <canvas id="loader-canvas" aria-hidden="true"></canvas>
+
+    <!-- String of Christmas lights across the top -->
+    <div class="loader__lights" aria-hidden="true">
+      <div class="loader__wire"></div>
+      <div class="loader__bulbs" id="loader-bulbs"></div>
+    </div>
+
+    <div class="loader__content">
+      <span class="loader__star" aria-hidden="true">✦</span>
+      <p class="loader__title">Preparing the trail…</p>
+      <p class="loader__subtitle">Loading the lights, music, and magic</p>
+      <div class="loader__bar-track">
+        <div class="loader__bar"
+             id="loader-bar"
+             role="progressbar"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Film grain texture overlay -->
   <div class="film-grain" aria-hidden="true"></div>
 
