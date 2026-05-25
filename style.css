@@ -50,6 +50,7 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   line-height: 1.6;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.85);
 }
 
 /* ── Film Grain ──────────────────────────────────────────── */
@@ -219,7 +220,8 @@ body {
   font-weight: 300;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
   margin-bottom: 28px;
   animation: fadeUp 1.2s var(--ease-out) 0.15s both;
 }
@@ -277,7 +279,8 @@ body {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
   text-transform: uppercase;
   margin-bottom: 52px;
   animation: fadeUp 1.2s var(--ease-out) 0.64s both;
@@ -368,10 +371,10 @@ body {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.0)  25%,
-    rgba(0, 0, 0, 0.05) 60%,
-    rgba(0, 0, 0, 0.55) 100%
+    rgba(0, 0, 0, 0.08) 0%,
+    transparent         28%,
+    rgba(0, 0, 0, 0.18) 55%,
+    rgba(0, 0, 0, 0.62) 100%
   );
 }
 
@@ -385,11 +388,17 @@ body {
 }
 
 .scene__content {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: var(--z-scene-content);
-  max-width: 680px;
-  padding: 100px 48px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 48px;
   text-align: center;
+  /* Soft vignette behind the text area — wide radial, not a box */
+  background: radial-gradient(ellipse 90% 55% at 50% 60%, rgba(0, 0, 0, 0.38) 0%, transparent 100%);
 }
 
 /* Animated entry — elements start hidden and slide up */
@@ -406,7 +415,8 @@ body {
   font-family: var(--font-ui);
   font-size: 9px;
   letter-spacing: 0.45em;
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
   text-transform: uppercase;
   display: block;
   margin-bottom: 14px;
@@ -429,29 +439,42 @@ body {
 
 .scene__title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 7vw, 5rem);
+  font-size: clamp(2.8rem, 8vw, 6rem);
   font-weight: 700;
-  line-height: 1.08;
-  margin-bottom: 16px;
+  line-height: 1.05;
+  color: #ffffff;
+  text-shadow:
+    0 2px 4px  rgba(0, 0, 0, 0.95),
+    0 6px 24px rgba(0, 0, 0, 0.75),
+    0 0  64px  rgba(0, 0, 0, 0.45);
+  margin-bottom: 10px;
   transition: opacity 0.9s var(--ease-out) 0.22s, transform 0.9s var(--ease-out) 0.22s;
 }
 
 .scene__subtitle {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-size: clamp(1.1rem, 2.6vw, 1.45rem);
   font-weight: 400;
   font-style: italic;
   color: var(--scene-primary, var(--color-gold));
-  margin-bottom: 30px;
+  text-shadow:
+    0 1px 4px  rgba(0, 0, 0, 0.95),
+    0 0  20px  rgba(212, 168, 67, 0.35);
+  margin-bottom: 26px;
   transition: opacity 0.8s var(--ease-out) 0.36s, transform 0.8s var(--ease-out) 0.36s;
 }
 
 .scene__description {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 2.2vw, 1.18rem);
+  font-size: clamp(0.95rem, 2vw, 1.12rem);
   font-weight: 300;
-  line-height: 1.9;
-  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.93);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+  /* Subtle transparent highlight — not a card, just a readability wash */
+  background: rgba(0, 0, 0, 0.28);
+  padding: 14px 22px;
+  border-radius: 2px;
   max-width: 520px;
   margin: 0 auto;
   transition: opacity 0.8s var(--ease-out) 0.5s, transform 0.8s var(--ease-out) 0.5s;
@@ -518,7 +541,8 @@ body {
   font-size: 10px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
   margin-bottom: 22px;
 }
 
@@ -563,7 +587,7 @@ body {
   .act-node { gap: 5px; }
   .act-node__label { font-size: 9px; letter-spacing: 0.08em; }
   .act-node__dot { width: 7px; height: 7px; }
-  .scene__content { padding: 100px 24px 60px; }
+  .scene__content { padding: 60px 20px; }
   .hero__content  { padding: 24px 20px; }
 }
 
